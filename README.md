@@ -365,8 +365,6 @@ The website includes an "Ask AI about RunwayX" control in the FAQ and footer. Th
 
 - [Ask ChatGPT](https://chatgpt.com/?q=RunwayX%20is%20a%20finance%20app%20for%20startups%2C%20built%20with%20Flutter%20for%20Android%20and%20iOS.%20It%20tracks%20expenses%2C%20calculates%20burn%20rate%20and%20runway%2C%20supports%20team%20members%20with%20role-based%20access%2C%20scans%20receipts%20and%20includes%20an%20AI%20CFO%20chat.%20Data%20is%20stored%20on%20Firebase%20with%20per-startup%20access%20rules.%20Explain%20what%20an%20app%20like%20this%20does%20and%20what%20a%20founder%20should%20check%20when%20evaluating%20it.)
 - [Ask Claude](https://claude.ai/new?q=RunwayX%20is%20a%20finance%20app%20for%20startups%2C%20built%20with%20Flutter%20for%20Android%20and%20iOS.%20It%20tracks%20expenses%2C%20calculates%20burn%20rate%20and%20runway%2C%20supports%20team%20members%20with%20role-based%20access%2C%20scans%20receipts%20and%20includes%20an%20AI%20CFO%20chat.%20Data%20is%20stored%20on%20Firebase%20with%20per-startup%20access%20rules.%20Explain%20what%20an%20app%20like%20this%20does%20and%20what%20a%20founder%20should%20check%20when%20evaluating%20it.)
-- [Ask Gemini](https://gemini.google.com/app?prompt=RunwayX%20is%20a%20finance%20app%20for%20startups%2C%20built%20with%20Flutter%20for%20Android%20and%20iOS.%20It%20tracks%20expenses%2C%20calculates%20burn%20rate%20and%20runway%2C%20supports%20team%20members%20with%20role-based%20access%2C%20scans%20receipts%20and%20includes%20an%20AI%20CFO%20chat.%20Data%20is%20stored%20on%20Firebase%20with%20per-startup%20access%20rules.%20Explain%20what%20an%20app%20like%20this%20does%20and%20what%20a%20founder%20should%20check%20when%20evaluating%20it.) (paste the prompt if it does not prefill)
-- [Ask DeepSeek](https://chat.deepseek.com/) (paste the prompt)
 
 ---
 
@@ -505,7 +503,7 @@ Other routes: `/privacy`, `/security`, `/terms`.
 | --- | --- |
 | `src/components/Mockups.tsx` | Phone frame and coded app screens (home, expenses, runway, team, AI, scan) |
 | `src/components/Demo.tsx` | Chaptered demo player with KPI tiles and a 12-month burn chart |
-| `src/components/AskAI.tsx` | Links to ChatGPT, Claude, Gemini and DeepSeek with a prompt that points to `/readme.md`; copies the prompt plus the full README to the clipboard |
+| `src/components/AskAI.tsx` | Links to ChatGPT and Claude with a prompt that points to `/readme.md`; copies the prompt plus the full README to the clipboard |
 | `src/app/readme.md/route.ts` | Serves this README as Markdown at `/readme.md` for the Ask AI links |
 | `src/components/PixelScene.tsx` | Procedural pixel-art canvas scene |
 | `src/components/Reveal.tsx` | Scroll-reveal wrapper |
