@@ -100,7 +100,7 @@ export default function Navbar() {
         </ul>
 
         <Link
-          href="/#download"
+          href="/#pricing"
           className="group relative overflow-hidden whitespace-nowrap rounded-full bg-[#140d0b] px-3 py-2 text-xs font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition hover:bg-black/80 sm:mx-1 sm:text-sm"
         >
           <span className="relative z-10">Get the app</span>

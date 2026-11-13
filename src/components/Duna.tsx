@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Play } from "lucide-react";
 import { RaiseButton } from "./ui/RaiseButton";
 import { FloatCard, HandNote, RisingPhone } from "./Mockups";
 import { Accent } from "./Sections";
@@ -129,17 +129,26 @@ export function Hero() {
           RunwayX tracks every expense, calculates burn and runway in real time, and gives your team an AI CFO, all in one app.
         </motion.p>
         <motion.div
-          className="mt-10"
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6, ease }}
         >
           <RaiseButton
-            href="/#download"
+            href="/#pricing"
             className="px-6 py-3 text-[16px] font-semibold tracking-[-0.01em] sm:px-7 sm:py-3.5 sm:text-[18px]"
           >
             Get the app
           </RaiseButton>
+          <a
+            href="#demo"
+            className="group inline-flex items-center gap-2.5 text-[16px] font-semibold tracking-[-0.01em] text-ink sm:text-[18px]"
+          >
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-white shadow-[0_6px_16px_-6px_rgba(0,0,0,0.35)] ring-1 ring-black/5 transition-transform group-hover:scale-105">
+              <Play className="ml-0.5 h-3.5 w-3.5 fill-current" aria-hidden="true" />
+            </span>
+            Watch the tour
+          </a>
         </motion.div>
       </div>
     </section>
@@ -193,7 +202,7 @@ export function CenterAI() {
 }
 
 /* ---------------- Footer (Duna layout: link columns over the sky, legal bar over the land) ---------------- */
-type FooterLink = { href: string; label: string; external?: boolean };
+type FooterLink = { href: string; label: string; external?: boolean; download?: boolean };
 
 const footerColumns: { title: string; links: FooterLink[] }[] = [
   {
@@ -201,7 +210,7 @@ const footerColumns: { title: string; links: FooterLink[] }[] = [
     links: [
       { href: "/#features", label: "Features" },
       { href: "/#how", label: "How it works" },
-      { href: "/#pricing", label: "Pricing" },
+      { href: "/#pricing", label: "Free beta" },
     ],
   },
   {
@@ -221,8 +230,8 @@ const footerColumns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Get the app",
     links: [
-      { href: "https://play.google.com/store", label: "Android", external: true },
-      { href: "https://www.apple.com/app-store/", label: "iOS", external: true },
+      { href: "/downloads/runwayx-beta.apk", label: "Android beta (APK)", download: true },
+      { href: "/#pricing", label: "iOS: coming soon" },
     ],
   },
 ];
@@ -268,7 +277,9 @@ export function Footer() {
               <ul className="mt-5 space-y-3 text-[15px] font-medium text-white/90 sm:text-[16px]">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    {l.external ? (
+                    {l.download ? (
+                      <a href={l.href} download className="transition-opacity hover:opacity-70">{l.label}</a>
+                    ) : l.external ? (
                       <a href={l.href} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-70">
                         {l.label}
                         <span className="sr-only"> (opens in a new tab)</span>

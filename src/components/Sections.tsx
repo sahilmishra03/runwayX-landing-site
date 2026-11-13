@@ -4,13 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  Bot, Check, Flame, Hourglass, Plus, Receipt, ScanLine, Users,
+  Bot, Check, Download, Flame, Hourglass, Plus, Receipt, ScanLine, Users,
 } from "lucide-react";
 import Reveal from "./Reveal";
 import { FloatCard, HandNote, PhoneMockup, type Screen } from "./Mockups";
 import DemoPlayer from "./Demo";
 import AskAI from "./AskAI";
-import Link from "next/link";
 
 // Smooth ease-in-out for the FAQ accordion (no snap at either end)
 const FAQ_EASE = [0.65, 0, 0.35, 1] as const;
@@ -329,39 +328,56 @@ export function Stats() {
 }
 
 /* ---------------- Pricing ---------------- */
-const plans = [
-  { name: "Starter", price: "Free", note: "For solo founders", feats: ["1 startup", "Unlimited expenses", "Burn & runway"], cta: "Start free" },
-  { name: "Team", price: "₹999", note: "per month", feats: ["Up to 10 members", "Receipt scanning", "Category budgets", "AI CFO"], cta: "Start trial", hot: true },
-  { name: "Scale", price: "Custom", note: "For growing teams", feats: ["Unlimited members", "Priority support", "Custom reports"], cta: "Contact us" },
+/** Public beta APK served from /public/downloads. Update APK_VERSION when the file is replaced. */
+export const APK_URL = "/downloads/runwayx-beta.apk";
+export const APK_VERSION = "1.0.0 beta · 69 MB";
+
+const betaFeats = [
+  "Every feature unlocked",
+  "Unlimited expenses and receipt scans",
+  "Burn, runway and cash projection",
+  "Teams, payroll and budgets",
+  "AI CFO insights and chat",
 ];
 export function Pricing() {
   return (
     <section id="pricing" className="scroll-mt-24 border-t border-line px-5 py-16 sm:px-8 sm:py-24">
       <Reveal className="text-center">
         <Eyebrow>Pricing</Eyebrow>
-        <H2>Simple pricing that <Accent>grows</Accent> with you.</H2>
+        <H2>Free while we&apos;re in <Accent>beta</Accent>.</H2>
+        <p className="mx-auto mt-5 max-w-md text-ink/60">
+          Join the Android beta and use all of RunwayX at no cost. No card, no trial timer.
+        </p>
       </Reveal>
-      <div className="mx-auto mt-10 grid max-w-md gap-5 sm:mt-12 md:max-w-none md:grid-cols-3 md:gap-4 lg:gap-5">
-        {plans.map((p, i) => (
-          <Reveal key={p.name} delay={i * 0.08}>
-            <div className={`flex h-full flex-col rounded-2xl border p-6 lg:p-7 ${p.hot ? "border-ink bg-ink text-white" : "border-line bg-white"}`}>
-              <p className="text-sm font-semibold">{p.name}</p>
-              <p className="mt-4 text-4xl font-medium tracking-tight">{p.price}</p>
-              <p className={`text-sm ${p.hot ? "text-white/55" : "text-ink/50"}`}>{p.note}</p>
-              <ul className="mt-6 flex-1 space-y-2.5 text-sm">
-                {p.feats.map((f) => (
-                  <li key={f} className="flex items-center gap-2">
-                    <Check className="h-4 w-4" aria-hidden="true" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/#download" className={`mt-8 rounded-xl px-4 py-2.5 text-center text-sm font-semibold transition ${p.hot ? "bg-white text-ink hover:bg-white/85" : "bg-ink text-white hover:bg-ink/85"}`}>
-                {p.cta}
-              </Link>
-            </div>
-          </Reveal>
-        ))}
-      </div>
+      <Reveal delay={0.08} className="mx-auto mt-10 max-w-[460px] sm:mt-12">
+        <div className="flex flex-col rounded-3xl border border-ink bg-ink p-7 text-white shadow-[0_40px_80px_-40px_rgba(12,18,32,0.6)] sm:p-8">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-semibold">Beta</p>
+            <span className="rounded-full bg-[#9be15d] px-2.5 py-1 text-[12px] font-semibold text-ink">Android</span>
+          </div>
+          <p className="mt-5 text-5xl font-medium tracking-tight">Free</p>
+          <p className="mt-1 text-sm text-white/55">During the beta testing period</p>
+          <ul className="mt-7 space-y-3 text-[15px]">
+            {betaFeats.map((f) => (
+              <li key={f} className="flex items-center gap-2.5">
+                <Check className="h-4 w-4 text-[#9be15d]" aria-hidden="true" /> {f}
+              </li>
+            ))}
+          </ul>
+          <a
+            href={APK_URL}
+            download
+            className="mt-8 flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-[15px] font-semibold text-ink transition hover:bg-white/85"
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Download the beta APK
+          </a>
+          <p className="mt-3 text-center text-[12.5px] text-white/50">{APK_VERSION} · Android 7.0 or later</p>
+        </div>
+        <p className="mx-auto mt-5 max-w-sm text-center text-[13px] leading-relaxed text-ink/50">
+          Open the file on your phone and allow installs from your browser when Android asks. iOS is coming after the beta.
+        </p>
+      </Reveal>
     </section>
   );
 }
@@ -372,7 +388,8 @@ const faqs = [
   { q: "How is runway calculated?", a: "RunwayX divides your available funds by your average monthly burn, using your real logged expenses." },
   { q: "Is my financial data secure?", a: "Data is stored on Firebase with per-startup access rules. Only members you invite can see your numbers." },
   { q: "Can my team add expenses?", a: "Yes. Invite members with roles; they can log expenses and admins can review them." },
-  { q: "Which platforms are supported?", a: "RunwayX is built with Flutter and runs on Android and iOS." },
+  { q: "Which platforms are supported?", a: "The free beta is on Android now: download the APK from the pricing section. RunwayX is built with Flutter, and the iOS app follows after the beta." },
+  { q: "Is the beta really free?", a: "Yes. Every feature is free for beta testers on Android, with no card and no trial timer." },
 ];
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
